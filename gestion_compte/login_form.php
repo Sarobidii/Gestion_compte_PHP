@@ -33,7 +33,8 @@
             }
         ?>
         <input type="submit" value="Connexion"><br><br>
-        <a href="recuperation.php">Mot de passe oublié</a>
+        <a href="recuperation.php">Mot de passe oublié</a><br><br>
+        <button><a href="inscription.php">Créer un compte</a></button>
     </form>
 </body>
 </html>

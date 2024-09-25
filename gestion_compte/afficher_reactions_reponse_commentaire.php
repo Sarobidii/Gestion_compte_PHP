@@ -1,5 +1,5 @@
 <?php
-session_start();
+ session_start();
 include 'db_connect.php';
 
 if (!isset($_SESSION['id_user'])) {
@@ -7,15 +7,15 @@ if (!isset($_SESSION['id_user'])) {
     exit();
 }
 
-if (isset($_GET['id_publication'])) {
-    $id_publication = mysqli_real_escape_string($conn, $_GET['id_publication']);
-    
+if (isset($_GET['id_reponse_commentaire']) && isset($_GET['id_publication'])) {
+    $id_reponse_commentaire = mysqli_real_escape_string($conn, $_GET['id_reponse_commentaire']);
+    $id_publication = $_GET['id_publication'];
     $sql = "
         SELECT rp.id_compte, rp.id_reaction, c.nom, c.prenom, r.type_reaction
-        FROM reaction_publication rp
+        FROM reaction_reponse_commentaire rp
         JOIN compte c ON rp.id_compte = c.id
         JOIN reaction r ON rp.id_reaction = r.id
-        WHERE rp.id_publication = $id_publication";
+        WHERE rp.id_reponse_commentaire = $id_reponse_commentaire";
 
     $result = mysqli_query($conn, $sql);
 
@@ -28,5 +28,5 @@ if (isset($_GET['id_publication'])) {
     }
 } else {
     echo 'Invalid request. Publication ID not provided.';
-}
+} 
 ?>

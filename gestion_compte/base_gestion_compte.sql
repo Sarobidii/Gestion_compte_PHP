@@ -31,7 +31,7 @@ CREATE TABLE `amis` (
   KEY `id_compte_amis` (`id_compte_amis`),
   CONSTRAINT `amis_ibfk_1` FOREIGN KEY (`id_compte`) REFERENCES `compte` (`id`),
   CONSTRAINT `amis_ibfk_2` FOREIGN KEY (`id_compte_amis`) REFERENCES `compte` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `amis` (
 
 LOCK TABLES `amis` WRITE;
 /*!40000 ALTER TABLE `amis` DISABLE KEYS */;
-INSERT INTO `amis` VALUES (2,1,2);
+INSERT INTO `amis` VALUES (2,1,2),(3,1,4);
 /*!40000 ALTER TABLE `amis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,13 +56,13 @@ CREATE TABLE `commentaire` (
   `id_compte` int NOT NULL,
   `id_publication` int NOT NULL,
   `contenu` text NOT NULL,
-  `date_lance` date DEFAULT NULL,
+  `date_lance` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_compte` (`id_compte`),
   KEY `id_publication` (`id_publication`),
   CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_compte`) REFERENCES `compte` (`id`),
   CONSTRAINT `commentaire_ibfk_2` FOREIGN KEY (`id_publication`) REFERENCES `publication` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `commentaire` (
 
 LOCK TABLES `commentaire` WRITE;
 /*!40000 ALTER TABLE `commentaire` DISABLE KEYS */;
-INSERT INTO `commentaire` VALUES (3,1,2,'I miss you','2024-09-24'),(4,1,3,'Me too','2024-09-24'),(5,1,2,'When you come here ?','2024-09-24'),(6,1,1,'Where are you from?','2024-09-24');
+INSERT INTO `commentaire` VALUES (3,1,2,'I miss you','2024-09-24 00:00:00'),(4,1,3,'Me too','2024-09-24 00:00:00'),(5,1,2,'When you come here ?','2024-09-24 00:00:00'),(6,1,1,'Where are you from?','2024-09-24 00:00:00'),(7,1,3,'Wouah','2024-09-25 00:00:00');
 /*!40000 ALTER TABLE `commentaire` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ CREATE TABLE `compte` (
   `email` varchar(100) NOT NULL,
   `mdp` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `compte` (
 
 LOCK TABLES `compte` WRITE;
 /*!40000 ALTER TABLE `compte` DISABLE KEYS */;
-INSERT INTO `compte` VALUES (1,'Ratsilavoson','Sarobidy','finaritratsilavo@gmail.com','12345'),(2,'Ratsilavoson','Fitiavana','fitiavanaratsila@gmail.com','azerty');
+INSERT INTO `compte` VALUES (1,'Ratsilavoson','Sarobidy','finaritratsilavo@gmail.com','12345'),(2,'Ratsilavoson','Fitiavana','fitiavanaratsila@gmail.com','azerty'),(4,'Ranaivoson','Faniriana','fanihranvs@gmail.com','aqwzsx'),(5,'Harimanantsoa','Dayah','dayahgayo@gmail.com','1029384756'),(6,'Razanakoto','Fetra Mamy','fetraraz@gmail.com','fefeazerty'),(7,'','','','');
 /*!40000 ALTER TABLE `compte` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +141,7 @@ CREATE TABLE `reaction` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type_reaction` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,7 @@ CREATE TABLE `reaction` (
 
 LOCK TABLES `reaction` WRITE;
 /*!40000 ALTER TABLE `reaction` DISABLE KEYS */;
-INSERT INTO `reaction` VALUES (1,'J\'aime'),(2,'J\'adore'),(3,'Haha'),(4,'Wouah'),(5,'Triste'),(6,'En colère');
+INSERT INTO `reaction` VALUES (1,'J\'aime'),(2,'J\'adore'),(3,'Haha'),(4,'Wouah'),(5,'Triste'),(6,'En colère'),(7,'Solidaire');
 /*!40000 ALTER TABLE `reaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +173,7 @@ CREATE TABLE `reaction_commentaire` (
   CONSTRAINT `reaction_commentaire_ibfk_1` FOREIGN KEY (`id_compte`) REFERENCES `compte` (`id`),
   CONSTRAINT `reaction_commentaire_ibfk_2` FOREIGN KEY (`id_commentaire`) REFERENCES `commentaire` (`id`),
   CONSTRAINT `reaction_commentaire_ibfk_3` FOREIGN KEY (`id_reaction`) REFERENCES `reaction` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +182,7 @@ CREATE TABLE `reaction_commentaire` (
 
 LOCK TABLES `reaction_commentaire` WRITE;
 /*!40000 ALTER TABLE `reaction_commentaire` DISABLE KEYS */;
-INSERT INTO `reaction_commentaire` VALUES (1,1,4,1),(2,2,5,2),(3,2,4,2),(4,2,4,2),(5,2,5,2),(6,2,5,2),(7,1,6,3);
+INSERT INTO `reaction_commentaire` VALUES (13,1,4,4);
 /*!40000 ALTER TABLE `reaction_commentaire` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,7 +205,7 @@ CREATE TABLE `reaction_publication` (
   CONSTRAINT `reaction_publication_ibfk_1` FOREIGN KEY (`id_compte`) REFERENCES `compte` (`id`),
   CONSTRAINT `reaction_publication_ibfk_2` FOREIGN KEY (`id_publication`) REFERENCES `publication` (`id`),
   CONSTRAINT `reaction_publication_ibfk_3` FOREIGN KEY (`id_reaction`) REFERENCES `reaction` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,8 +214,69 @@ CREATE TABLE `reaction_publication` (
 
 LOCK TABLES `reaction_publication` WRITE;
 /*!40000 ALTER TABLE `reaction_publication` DISABLE KEYS */;
-INSERT INTO `reaction_publication` VALUES (1,1,1,2),(2,1,1,2),(3,2,3,3),(4,1,2,5),(5,1,3,2);
+INSERT INTO `reaction_publication` VALUES (6,1,3,6);
 /*!40000 ALTER TABLE `reaction_publication` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reaction_reponse_commentaire`
+--
+
+DROP TABLE IF EXISTS `reaction_reponse_commentaire`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reaction_reponse_commentaire` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_compte` int NOT NULL,
+  `id_reponse_commentaire` int NOT NULL,
+  `id_reaction` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_compte` (`id_compte`),
+  KEY `id_reponse_commentaire` (`id_reponse_commentaire`),
+  KEY `id_reaction` (`id_reaction`),
+  CONSTRAINT `reaction_reponse_commentaire_ibfk_1` FOREIGN KEY (`id_compte`) REFERENCES `compte` (`id`),
+  CONSTRAINT `reaction_reponse_commentaire_ibfk_2` FOREIGN KEY (`id_reponse_commentaire`) REFERENCES `reponse_commentaire` (`id`),
+  CONSTRAINT `reaction_reponse_commentaire_ibfk_3` FOREIGN KEY (`id_reaction`) REFERENCES `reaction` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reaction_reponse_commentaire`
+--
+
+LOCK TABLES `reaction_reponse_commentaire` WRITE;
+/*!40000 ALTER TABLE `reaction_reponse_commentaire` DISABLE KEYS */;
+INSERT INTO `reaction_reponse_commentaire` VALUES (3,1,3,4),(4,1,5,7);
+/*!40000 ALTER TABLE `reaction_reponse_commentaire` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reponse_commentaire`
+--
+
+DROP TABLE IF EXISTS `reponse_commentaire`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reponse_commentaire` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_commentaire` int NOT NULL,
+  `contenu` text NOT NULL,
+  `id_compte` int NOT NULL,
+  `date_lance` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_commentaire` (`id_commentaire`),
+  CONSTRAINT `fk_commentaire` FOREIGN KEY (`id_commentaire`) REFERENCES `commentaire` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reponse_commentaire`
+--
+
+LOCK TABLES `reponse_commentaire` WRITE;
+/*!40000 ALTER TABLE `reponse_commentaire` DISABLE KEYS */;
+INSERT INTO `reponse_commentaire` VALUES (3,4,'Let\'s play',1,'2024-09-25 19:42:33'),(5,4,'GO',1,'2024-09-25 20:38:59'),(6,4,'Yeah',1,'2024-09-25 20:40:07'),(7,4,'Youpi',1,'2024-09-25 20:49:18');
+/*!40000 ALTER TABLE `reponse_commentaire` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -227,4 +288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-25  5:12:16
+-- Dump completed on 2024-09-25 22:15:00

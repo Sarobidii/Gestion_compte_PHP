@@ -8,6 +8,8 @@
 <body>
     <button><a href="publication.php">Créer une publication</a></button>
     <button><a href="suggestion.php">Voir les suggestions d'amis</a></button>
+    <button><a href="liste_amis.php">Voir la liste d'amis</a></button>
+    <button><a href="logout.php">Se déconnecter</a></button>
 <?php
 session_start();
 include 'db_connect.php';
@@ -66,7 +68,7 @@ if (isset($_SESSION['id_user'])) {
             $nombre_commentaires = $rowCount1['total_commentaires'];
 
             if ($nombre_reactions > 0) {
-                echo '<form action="afficher_reactions.php" method="post">';
+                echo '<form action="afficher_reactions.php" method="get">';
                 echo '<input type="hidden" name="id_publication" value="' . htmlspecialchars($id_publication) . '">';
                 echo '<br>';
                 echo '<button type="submit">' . $nombre_reactions . ' réaction(s)' .'</button>';
@@ -75,7 +77,7 @@ if (isset($_SESSION['id_user'])) {
                 echo 'Aucune réaction';
             }
             if ($nombre_commentaires > 0) {
-                echo '<form action="afficher_commentaires.php" method="post">';
+                echo '<form action="afficher_commentaires.php" method="get">';
                 echo '<input type="hidden" name="id_publication" value="' . htmlspecialchars($id_publication) . '">';
                 echo '<br>';
                 echo '<button type="submit">' . $nombre_commentaires . ' commentaire(s)' .'</button>';
